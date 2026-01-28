@@ -1,20 +1,32 @@
-import React from 'react'
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+const Catalogo = () => (
+  <div style={{ padding: '20px' }}>
+    <h1>🏪 Catálogo ProLimp</h1>
+    <p>Aqui as empresas verão os produtos.</p>
+  </div>
+);
+
+const Admin = () => (
+  <div style={{ padding: '20px' }}>
+    <h1>🔐 Painel Administrativo</h1>
+    <p>Aqui você vai cadastrar os itens do pen-drive.</p>
+  </div>
+);
 
 function App() {
   return (
-    <div style={{ padding: '20px', fontFamily: 'sans-serif' }}>
-      <header>
-        <h1>ProLimp - Catálogo Digital</h1>
-        <p>Área de apresentação de produtos</p>
-      </header>
-      
-      <main>
-        <div style={{ border: '2px dashed #ccc', padding: '40px', textAlign: 'center' }}>
-          Conteúdo do Catálogo (Em breve)
-        </div>
-      </main>
-    </div>
-  )
+    <Router>
+      <Routes>
+        {/* Rota principal: o catálogo que as empresas acessam */}
+        <Route path="/" element={<Catalogo />} />
+        
+        {/* Rota do Admin: onde você faz o cadastro */}
+        <Route path="/admin" element={<Admin />} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;

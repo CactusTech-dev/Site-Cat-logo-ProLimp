@@ -8,7 +8,7 @@ Foi criado como projeto prático de desenvolvimento web utilizando **HTML**, **C
 ---
 
 ## 🌐 Demonstração  
-👉 [Acesse o site aqui](https://cactustech-dev.github.io/Site-Cat-logo-ProLimp/)
+👉 [Acesse o site aqui](https://site-cat-logo-pro-limp.vercel.app/)
 
 ---
 

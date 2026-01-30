@@ -1,28 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react'; // 1. Adicione o useState aqui
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
-const Catalogo = () => (
-  <div style={{ padding: '20px' }}>
-    <h1>🏪 Catálogo ProLimp</h1>
-    <p>Aqui as empresas verão os produtos.</p>
-  </div>
-);
-
-const Admin = () => (
-  <div style={{ padding: '20px' }}>
-    <h1>🔐 Painel Administrativo</h1>
-    <p>Aqui você vai cadastrar os itens do pen-drive.</p>
-  </div>
-);
+import Admin from './pages/Admin.jsx';
+import Sidebar from './components/Sidebar.jsx';
+import Catalogo from './pages/Catalogo.jsx';
 
 function App() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
     <Router>
       <Routes>
-        {/* Rota principal: o catálogo que as empresas acessam */}
-        <Route path="/" element={<Catalogo />} />
-        
-        {/* Rota do Admin: onde você faz o cadastro */}
+        <Route 
+          path="/" 
+          element={
+            <div className="layout-container" style={{ display: 'flex' }}>
+              <Sidebar isOpen={isMenuOpen} setIsOpen={setIsMenuOpen} /> 
+              
+              <main style={{ 
+                marginLeft: isMenuOpen ? '260px' : '70px', 
+                width: '100%', 
+                padding: '20px',
+                transition: 'margin-left 0.3s ease' 
+              }}>
+                <Catalogo />
+              </main>
+            </div>
+          } 
+        />
         <Route path="/admin" element={<Admin />} />
       </Routes>
     </Router>

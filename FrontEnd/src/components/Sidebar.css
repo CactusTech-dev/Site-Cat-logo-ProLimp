@@ -1,0 +1,89 @@
+.menu-toggle {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 1100;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  font-size: 1.2rem;
+}
+
+.sidebar {
+  width: 70px;
+  height: 100vh;
+  background-color: #ffffff;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  padding: 80px 15px 30px 15px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.sidebar.open {
+  width: 260px;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 40px;
+  color: #007bff;
+  flex-shrink: 0;
+}
+
+.sidebar-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid #f0f0f0;
+  width: 100%;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px 5px;
+  color: #555;
+  white-space: nowrap; 
+}
+
+.icon {
+  font-size: 1.4rem;
+  min-width: 30px;
+}
+
+.admin-btn {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: auto;
+  padding: 12px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.admin-btn:hover {
+  background-color: #e2e6ea;
+}

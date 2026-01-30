@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; // 1. Adicionei o useEffect aqui
 import './Admin.css'; 
 import logo from '../assets/LogoProLimp.jpg';
 
@@ -7,6 +7,13 @@ const Admin = () => {
   const [descricao, setDescricao] = useState(''); 
   const [tipoImagem, setTipoImagem] = useState('link');
   const [imagem, setImagem] = useState('');
+
+  useEffect(() => {
+    document.body.style.backgroundColor = "#151a2d"; 
+    return () => {
+      document.body.style.backgroundColor = "white";
+    };
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();

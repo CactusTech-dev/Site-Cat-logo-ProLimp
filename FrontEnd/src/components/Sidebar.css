@@ -3,8 +3,8 @@
   top: 15px;
   left: 15px;
   z-index: 1100;
-  background: #007bff;
-  color: white;
+  background: #ffffff;
+  color: #007bff;
   border: none;
   border-radius: 8px;
   padding: 10px;
@@ -16,15 +16,15 @@
 .sidebar {
   width: 70px;
   height: 100vh;
-  background-color: #ffffff;
-  border-right: 1px solid #ddd;
+  background-color: #007bff;
+  border-right: 1px solid #007bff;
   display: flex;
   flex-direction: column;
   padding: 80px 15px 30px 15px;
   position: fixed;
   left: 0;
   top: 0;
-  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
   z-index: 1000;
 }
@@ -38,7 +38,7 @@
   align-items: center;
   gap: 10px;
   margin-bottom: 40px;
-  color: #007bff;
+  color: #ffffff;
   flex-shrink: 0;
 }
 
@@ -61,7 +61,7 @@
   align-items: center;
   gap: 15px;
   padding: 12px 5px;
-  color: #555;
+  color: #ffffff;
   white-space: nowrap; 
 }
 
@@ -79,11 +79,49 @@
   background-color: #f8f9fa;
   border-radius: 10px;
   text-decoration: none;
-  color: #333;
+  color: #151a2d;
   font-weight: bold;
   transition: background 0.2s;
 }
 
 .admin-btn:hover {
   background-color: #e2e6ea;
+}
+
+.sidebar a {
+  text-decoration: none; 
+  color: inherit;        
+  display: block;        
+}
+
+.social-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.social-link:hover .info-item {
+  color: #151a2d; 
+  transition: color 0.2s ease;
+}
+
+.sidebar-logo {
+  width: 51px;      
+  height: 51px;
+  border-radius: 50%; 
+  object-fit: cover; 
+  border: 2px solid #ffffff; 
+  transition: all 0.3s ease;
+}
+
+.sidebar-logo.expanded {
+  width: 100px;
+  height: 100px;
+}
+
+.full-logo {
+  font-weight: bold;
+  font-size: 2.2rem;
+  color: #007bff;
+  white-space: nowrap;
 }

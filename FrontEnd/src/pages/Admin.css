@@ -18,7 +18,7 @@
 .admin-card h1 {
   margin-bottom: 20px;
   font-size: 1.5rem;
-  color: #007bff;
+  color: #151a2d;
   text-align: center;
 }
 
@@ -43,7 +43,7 @@
 }
 
 .form-group input:focus {
-  border-color: #007bff;
+  border-color: #151a2d;
 }
 
 .radio-group {

@@ -1,0 +1,27 @@
+.theme-toggle-float {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 5000; 
+  transition: all 0.3s ease;
+}
+
+.theme-toggle-float:hover {
+  transform: scale(1.1);
+}
+
+.app-wrapper.dark .theme-toggle-float {
+  background-color: #f1c40f;
+  color: #121212;
+}

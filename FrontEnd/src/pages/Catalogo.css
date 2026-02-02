@@ -1,0 +1,220 @@
+.catalogo-page {
+  padding: 20px;
+  background-color: var(--bg-page); 
+  min-height: 100vh;
+}
+
+.catalogo-header {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.catalogo-header h1 {
+  color: var(--text-main); 
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.catalogo-header p {
+  color: var(--text-main); 
+  opacity: 0.8;
+}
+
+/* GRADE DE PRODUTOS */
+.produtos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+/* CARD DO PRODUTO */
+.card-produto {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: var(--card-bg); 
+  border: 1px solid var(--border-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.card-produto:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.img-container {
+  width: 100%;
+  height: 200px;    
+  overflow: hidden; 
+  background-color: #ffffff; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app-wrapper.dark .img-container {
+  background-color: #ffffff;
+}
+
+.img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.card-info {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.card-info h3 {
+  margin: 0 0 10px 0;
+  color: var(--text-main); 
+  margin-bottom: 10px;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid var(--border-color); 
+  padding-top: 15px;
+  margin-top: auto;
+}
+
+.btn-whatsapp {
+  background-color: #25d366;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* MODAL (SOBREPOSIÇÃO) */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3000; 
+}
+
+.modal-content {
+  padding: 30px;
+  border-radius: 20px;
+  max-width: 650px;
+  width: 90%;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  background-color: var(--card-bg);
+  color: var(--text-main);
+  border: 1px solid var(--border-color)
+}
+
+.modal-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.modal-img-box {
+  flex: 1;
+  min-width: 200px;
+  height: 250px;
+  background: #f9f9f9;
+  border-radius: 10px;
+}
+
+.app-wrapper.dark .modal-img-box {
+  background: #2a2a2a;
+}
+
+.modal-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.modal-info {
+  flex: 1.5;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-info h2 {
+  color: var(--text-main);
+}
+
+.modal-descricao {
+  color: var(--text-main); 
+  opacity: 0.9;
+  margin: 15px 0;
+}
+
+/* CONTROLES QUANTIDADE */
+.controles {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.controles button {
+  padding: 6px 12px;
+  border: 1px solid #007bff;
+  background: transparent;
+  color: #007bff;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.app-wrapper.dark .controles button {
+  border-color: #4da3ff;
+  color: #4da3ff;
+}
+
+.controles .btn-mais-dez {
+  background: #007bff;
+  color: white;
+}
+
+.qtd-numero {
+  font-size: 1.4rem;
+  font-weight: bold;
+  min-width: 30px;
+  text-align: center;
+  color: var(--text-main);
+}
+
+.btn-confirmar {
+  margin-top: 25px;
+  background: #25d366;
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-fechar {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: var(--text-main);
+  opacity: 0.5;
+}

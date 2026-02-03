@@ -12,7 +12,7 @@ const Admin = ({ setAutenticado }) => {
 
   useEffect(() => localStorage.setItem('prods', JSON.stringify(produtos)), [produtos]);
 
-  const handleLogout = () => { setAutenticado(false); localStorage.removeItem('autenticado'); navigate('/login'); };
+  const handleLogout = () => { localStorage.removeItem('token'); setAutenticado(false); navigate('/login'); };
   
   const handleFile = (e) => {
     const reader = new FileReader();

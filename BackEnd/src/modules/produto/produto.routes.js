@@ -8,6 +8,7 @@ import {
 } from "../produto/produto.controller.js";
 
 import { uploadProduto } from "../../middlewares/uploadProduto.js";
+import { authAdmin } from "../../middlewares/authAdmin.js";
 
 const router = Router();
 
@@ -15,23 +16,23 @@ const router = Router();
 router.get("/", listarProdutos);
 
 // GET /api/produtos/:id
-router.get("/:id", buscarProdutoPorId);
+router.get("/:id", authAdmin, buscarProdutoPorId);
 
 // POST /api/produtos
 router.post(
-  "/",
+  "/", authAdmin,
   uploadProduto.single("imagem"),
   criarProduto
 );
 
 // PUT /api/produtos/:id
 router.put(
-  "/:id",
+  "/:id", authAdmin,
   uploadProduto.single("imagem"),
   atualizarProduto
 );
 
 // DELETE /api/produtos/:id
-router.delete("/:id", deletarProduto);
+router.delete("/:id", authAdmin, deletarProduto);
 
 export default router;

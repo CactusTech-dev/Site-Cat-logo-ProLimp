@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; 
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Admin from './pages/Admin.jsx';
 import Sidebar from './components/Sidebar.jsx';
@@ -9,13 +9,19 @@ import Login from './pages/Login.jsx';
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [tema, setTema] = useState(localStorage.getItem('tema') || 'light');
-  const [autenticado, setAutenticado] = useState(localStorage.getItem('autenticado') === 'true');
+  const [autenticado, setAutenticado] = useState(false);
+
 
   const toggleTema = () => {
     const novoTema = tema === 'light' ? 'dark' : 'light';
     setTema(novoTema);
     localStorage.setItem('tema', novoTema);
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) setAutenticado(true);
+  }, []);
 
   return (
     <div className={`app-wrapper ${tema}`}>

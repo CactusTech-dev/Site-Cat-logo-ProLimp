@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// Importamos o componente que vamos criar no próximo passo
 import ThemeToggle from '../components/ThemeToggle'; 
 import './Catalogo.css';
 
@@ -37,9 +36,6 @@ const Catalogo = ({ tema, toggleTema }) => {
 
   return (
     <div className="catalogo-page">
-      {/* CHAMADA DO COMPONENTE: 
-          Agora o botão de tema é um componente independente 
-      */}
       <ThemeToggle tema={tema} toggleTema={toggleTema} />
 
       <header className="catalogo-header">

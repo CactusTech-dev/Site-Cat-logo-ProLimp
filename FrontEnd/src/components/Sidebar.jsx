@@ -62,7 +62,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
         </div>
 
         <div className="sidebar-footer">
-          <Link to="/admin" className="admin-btn">
+          <Link to="/login" className="admin-btn">
             <FaUserShield className="icon" />
             {isOpen && <span>Painel Admin</span>}
           </Link>

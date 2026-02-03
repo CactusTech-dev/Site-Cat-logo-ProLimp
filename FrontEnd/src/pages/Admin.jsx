@@ -1,74 +1,103 @@
-import React, { useState, useEffect } from 'react'; // 1. Adicionei o useEffect aqui
-import './Admin.css'; 
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { FaPlus, FaEdit, FaTrash, FaArrowLeft } from 'react-icons/fa';
 import logo from '../assets/LogoProLimp.jpg';
+import './Admin.css';
 
-const Admin = () => {
-  const [nome, setNome] = useState('');
-  const [descricao, setDescricao] = useState(''); 
-  const [tipoImagem, setTipoImagem] = useState('link');
-  const [imagem, setImagem] = useState('');
+const Admin = ({ setAutenticado }) => {
+  const [aba, setAba] = useState('menu');
+  const [produtos, setProdutos] = useState(JSON.parse(localStorage.getItem('prods')) || []);
+  const [form, setForm] = useState({ id: null, nome: '', desc: '', img: '', tipo: 'link' });
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    document.body.style.backgroundColor = "#151a2d"; 
-    return () => {
-      document.body.style.backgroundColor = "white";
-    };
-  }, []);
+  useEffect(() => localStorage.setItem('prods', JSON.stringify(produtos)), [produtos]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log({ nome, descricao, imagem, tipoImagem });
-    alert("Produto salvo com sucesso!");
+  const handleLogout = () => { setAutenticado(false); localStorage.removeItem('autenticado'); navigate('/login'); };
+  
+  const handleFile = (e) => {
+    const reader = new FileReader();
+    reader.onload = () => setForm({...form, img: reader.result});
+    reader.readAsDataURL(e.target.files[0]);
   };
+
+  const save = (e) => {
+    e.preventDefault();
+    if (form.id) setProdutos(produtos.map(p => p.id === form.id ? form : p));
+    else setProdutos([...produtos, { ...form, id: Date.now() }]);
+    setAba('menu'); setForm({ id: null, nome: '', desc: '', img: '', tipo: 'link' });
+  };
+
+  // --- Sub-Componentes para reduzir o JSX principal ---
+  const Header = ({ title }) => (
+    <div className="admin-header-min">
+      <button className="btn-voltar-simples" onClick={() => setAba('menu')}><FaArrowLeft /> Voltar</button>
+      <h1>{title}</h1>
+    </div>
+  );
 
   return (
     <div className="admin-container">
-      <div className="admin-card">
-        <div className="logo-container">
-          <img src={logo} alt="Logo ProLimp" className="admin-logo" />
+      <button onClick={handleLogout} className="btn-logout">Sair</button>
+
+      {/* VIEW: MENU PRINCIPAL */}
+      {aba === 'menu' && (
+        <div className="admin-dashboard">
+          <img src={logo} alt="Logo" className="admin-logo" />
+          <h1>Gestão de Produtos</h1>
+          <p className="admin-subtitle">O que você deseja fazer hoje?</p>
+          <div className="admin-grid">
+            {[ {a: 'add', i: <FaPlus />, t: 'Adicionar', c: 'adicionar'}, 
+            {a: 'edit', i: <FaEdit />, t: 'Editar', c: 'editar'}, {a: 'del', i: <FaTrash />, t: 'Excluir', c: 'excluir'} ].map(item => (
+              <div key={item.a} className="action-card" onClick={() => setAba(item.c)}>
+                <div className={`icon-box ${item.a}`}>{item.i}</div>
+                <div className="card-info"><h3>{item.t}</h3><p>Clique para gerenciar</p></div>
+              </div>
+            ))}
+          </div>
         </div>
-        <h1>Cadastro de Produtos ProLimp</h1>
-        
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label>Nome do Produto</label>
-            <input 
-              type="text" 
-              value={nome} 
-              onChange={(e) => setNome(e.target.value)} 
-              required 
-              placeholder="Ex: Detergente 5L"
-            />
-          </div>
+      )}
 
-          <div className="radio-group">
-            <label style={{fontWeight: 'bold', display: 'block', marginBottom: '10px'}}>Origem da Imagem</label>
-            <label><input type="radio" name="tipo" checked={tipoImagem === 'link'} onChange={() => setTipoImagem('link')} /> Link Web</label>
-            <label style={{marginLeft: '15px'}}><input type="radio" name="tipo" checked={tipoImagem === 'arquivo'} onChange={() => setTipoImagem('arquivo')} /> Upload</label>
-          </div>
+      {/* VIEW: FORMULÁRIO (ADICIONAR/EDITAR) */}
+      {(aba === 'adicionar' || aba === 'edit-form') && (
+        <div className="admin-card">
+          <Header title={form.id ? "Editar" : "Novo Produto"} />
+          <form onSubmit={save}>
+            <input placeholder="Nome" value={form.nome} onChange={e => setForm({...form, nome: e.target.value})} required />
+            <input placeholder="Descrição" value={form.desc} onChange={e => setForm({...form, desc: e.target.value})} required />
+            <div className="radio-group-min">
+              <input type="radio" checked={form.tipo === 'link'} onChange={() => setForm({...form, tipo: 'link'})} /> Link
+              <input type="radio" checked={form.tipo === 'arquivo'} onChange={() => setForm({...form, tipo: 'arquivo'})} /> Arquivo
+            </div>
+            {form.tipo === 'link' ? 
+              <input placeholder="URL" value={form.img} onChange={e => setForm({...form, img: e.target.value})} /> :
+              <input type="file" onChange={handleFile} />
+            }
+            <button type="submit" className="btn-salvar">Salvar</button>
+          </form>
+        </div>
+      )}
 
-          <div className="form-group">
-            {tipoImagem === 'link' ? (
-              <input type="url" placeholder="URL da Imagem" onChange={(e) => setImagem(e.target.value)} />
-            ) : (
-              <input type="file" accept="image/*" onChange={(e) => setImagem(e.target.files[0])} />
-            )}
-          </div>
-
-          <div className="form-group">
-            <label>Descrição</label>
-            <input 
-              type="text" 
-              value={descricao} 
-              onChange={(e) => setDescricao(e.target.value)} 
-              required 
-              placeholder="Campo opcional"
-            />
-          </div>
-
-          <button type="submit" className="btn-salvar">Salvar Produto</button>
-        </form>
-      </div>
+      {/* VIEW: LISTAGEM */}
+      {(aba === 'editar' || aba === 'excluir') && (
+        <div className="admin-list-container">
+          <Header title={aba === 'editar' ? "Editar" : "Excluir"} />
+          <table className="admin-table">
+            <tbody>
+              {produtos.map(p => (
+                <tr key={p.id}>
+                  <td>{p.nome}</td>
+                  <td style={{textAlign: 'right'}}>
+                    {aba === 'editar' ? 
+                      <button className="btn-edit" onClick={() => { setForm(p); setAba('edit-form'); }}>Editar</button> :
+                      <button className="btn-delete" onClick={() => setProdutos(produtos.filter(i => i.id !== p.id))}>Excluir</button>
+                    }
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 };

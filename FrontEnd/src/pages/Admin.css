@@ -1,87 +1,304 @@
+/* 1. CONTAINER PAI (O isolamento) */
 .admin-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   min-height: 100vh;
-  padding: 20px;
+  padding: 60px 20px;
+  background-color: #151a2d !important;
+  font-family: 'Inter', sans-serif;
 }
 
-.admin-card {
-  background: white;
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+/* 2. DASHBOARD & GRID */
+.admin-container .admin-dashboard {
+  color: #ffffff !important;
   width: 100%;
-  max-width: 500px;
-}
-
-.admin-card h1 {
-  margin-bottom: 20px;
-  font-size: 1.5rem;
-  color: #151a2d;
+  max-width: 1000px;
   text-align: center;
 }
 
-.form-group {
-  margin-bottom: 15px;
+.admin-container .admin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  margin-top: 40px;
+}
+
+/* 3. CARDS DE AÇÃO (Melhorados) */
+.admin-container .action-card {
+  background: #ffffff !important;
+  padding: 30px;
+  border-radius: 16px;
   display: flex;
-  flex-direction: column;
-}
-
-.form-group label {
-  font-weight: bold;
-  margin-bottom: 5px;
-  font-size: 0.9rem;
-}
-
-.form-group input, .form-group select {
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  outline: none;
-  transition: border-color 0.3s;
-}
-
-.form-group input:focus {
-  border-color: #151a2d;
-}
-
-.radio-group {
-  border: 1px solid #eee;
-  padding: 15px;
-  border-radius: 8px;
-  margin-bottom: 15px;
-}
-
-.btn-salvar {
-  width: 100%;
-  padding: 15px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
+  align-items: center;
+  gap: 20px;
   cursor: pointer;
-  transition: transform 0.2s, background 0.3s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
-.btn-salvar:hover {
-  background-color: #0056b3;
+.admin-container .action-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  border-color: #3b82f6 !important;
+}
+
+/* Ícones Maiores */
+.admin-container .icon-box {
+  width: 65px;
+  height: 65px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem; /* Ícones maiores aqui */
+}
+
+.admin-container .card-info h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #151a2d !important;
+}
+
+.admin-container .card-info p {
+  margin: 5px 0 0;
+  font-size: 0.9rem;
+  color: #64748b !important;
+}
+
+/* 4. LOGO (Reintroduzida) */
+.admin-container .admin-logo {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  margin-bottom: 20px;
+  background: white;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+}
+
+/* 5. FORMULÁRIO (Fixando a quebra de layout) */
+.admin-container .admin-card {
+  background: #ffffff !important;
+  padding: 40px;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  animation: fadeIn 0.4s ease-out;
+}
+
+.admin-container .admin-card input {
+  width: 100%;
+  padding: 14px;
+  margin-top: 8px;
+  margin-bottom: 20px;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 10px;
+  background: #f8fafc !important;
+  color: #151a2d !important;
+  font-size: 1rem;
+}
+
+/* 6. TABELA (Minimalista mas Organizada) */
+.admin-container .admin-list-container {
+  width: 100%;
+  max-width: 850px;
+  background: #ffffff !important;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.admin-container .admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-container .admin-table td {
+  padding: 20px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #151a2d !important;
+  font-weight: 500;
+}
+
+/* 7. BOTÕES (Estilo Apple/Stripe) */
+.admin-container .btn-salvar {
+  background: #151a2d !important;
+  color: white !important;
+  padding: 16px;
+  border-radius: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.2s;
+  border: none;
+  cursor: pointer;
+}
+
+.admin-container .btn-salvar:hover {
+  background: #151a2d !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.admin-container .btn-edit, .admin-container .btn-delete {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.admin-container .btn-edit { background: #151a2d !important; color: #b45309 !important; }
+.admin-container .btn-delete { background: #151a2d !important; color: #b91c1c !important; }
+
+/* 8. ANIMAÇÕES */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Cores dos Ícones */
+.admin-container .icon-box.add { background: #ecfdf5 !important; color: #10b981 !important; }
+.admin-container .icon-box.edit { background: #fffbeb !important; color: #f59e0b !important; }
+.admin-container .icon-box.del { background: #fef2f2 !important; color: #ef4444 !important; }
+
+/* 1. BOTÃO SAIR (Logout - Canto superior) */
+.btn-logout {
+  position: fixed;
+  top: 25px;
+  right: 25px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px); /* Efeito de vidro moderno */
+  -webkit-backdrop-filter: blur(12px);
+  color: #ff4d4d !important;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 77, 77, 0.3);
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-logout:hover {
+  background: #ff4d4d;
+  color: white !important;
+  box-shadow: 0 0 20px rgba(255, 77, 77, 0.4);
+  transform: scale(1.05);
+}
+
+/* 2. BOTÃO VOLTAR (Dentro dos cards/listas) */
+.admin-container .btn-voltar-simples {
+  background: #f1f5f9 !important;
+  color: #151a2d !important;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 25px;
+  transition: all 0.2s;
+}
+
+.admin-container .btn-voltar-simples:hover {
+  background: #e2e8f0 !important;
+  color: #151a2d !important;
+  transform: translateX(-4px); 
+}
+
+/* 3. BOTÃO SALVAR / CONFIRMAR ALTERAÇÕES */
+.admin-container .btn-salvar {
+  width: 100%;
+  padding: 16px;
+  background: #2563eb !important; 
+  color: white !important;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+  box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+}
+
+.admin-container .btn-salvar:hover {
+  background: #1d4ed8 !important;
+  box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.4);
   transform: translateY(-2px);
 }
 
-.admin-logo {
-  width: 120px;
-  height: 120px; 
-  object-fit: cover; 
-  border-radius: 50%;
-  border: 4px solid #007bff; 
-  box-shadow: 0 2px 5px #007bff;
-  background-color: rgb(255, 255, 255); 
+.admin-container .radio-group-min {
+  background: #f8fafc;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+  color: #151a2d;
+  font-weight: 500;
+  font-size: 0.9rem;
 }
 
-.logo-container {
+.admin-container .radio-group-min input[type="radio"] {
+  width: auto; 
+  margin: 0;
+  cursor: pointer;
+}
+
+.admin-container .admin-dashboard {
   display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; 
+  width: 100%;
+  max-width: 1000px;
+  text-align: center;
+  margin: auto; 
+}
+
+/* Título Principal */
+.admin-container .admin-dashboard h1 {
+  color: #ffffff !important;
+  font-size: 2.5rem; 
+  font-weight: 800;
+  margin-bottom: 15px;
+  letter-spacing: -1px;
+}
+
+.admin-container .admin-subtitle {
+  color: #94a3b8 !important;
+  font-size: 1.1rem;
+  font-weight: 400;
+  margin-bottom: 0px; 
+  max-width: 300px;
+  line-height: 1.1;
+}
+
+/* Grid de Cards */
+.admin-container .admin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 2  5px;
+  width: 100%;
+  animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }

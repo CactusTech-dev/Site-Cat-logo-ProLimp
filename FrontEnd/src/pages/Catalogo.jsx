@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ThemeToggle from '../components/ThemeToggle'; 
+import { useCarrinho } from '../services/CarrinhoContext'; 
 import './Catalogo.css';
 
 const Catalogo = ({ tema, toggleTema }) => {
@@ -7,6 +8,8 @@ const Catalogo = ({ tema, toggleTema }) => {
   const [loading, setLoading] = useState(true);
   const [produtoSelecionado, setProdutoSelecionado] = useState(null);
   const [quantidade, setQuantidade] = useState(1);
+
+  const { add } = useCarrinho();
 
   useEffect(() => {
     async function carregarProdutos() {
@@ -30,6 +33,14 @@ const Catalogo = ({ tema, toggleTema }) => {
 
   const fecharModal = () => {
     setProdutoSelecionado(null);
+  };
+
+  const handleAdicionarAoCarrinho = () => {
+    for(let i = 0; i < quantidade; i++) {
+      add(produtoSelecionado);
+    }
+    
+    fecharModal(); 
   };
 
   if (loading) return <div className="loading">Carregando produtos...</div>;
@@ -92,8 +103,7 @@ const Catalogo = ({ tema, toggleTema }) => {
                     <button className="btn-mais-dez" onClick={() => setQuantidade(q => q + 10)}>+10</button>
                   </div>
                 </div>
-
-                <button className="btn-confirmar" onClick={() => alert(`Pedido de ${quantidade}x ${produtoSelecionado.nome} adicionado!`)}>
+                <button className="btn-confirmar" onClick={handleAdicionarAoCarrinho}>
                   Adicionar ao Orçamento
                 </button>
               </div>

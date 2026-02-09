@@ -52,12 +52,13 @@ const Login = ({ setAutenticado }) => {
   return (
     <div className="login-page">
       <div className="login-card">
+        <a href='http://localhost:5173/'>
         <img
           src={logoProlimp}
           alt="Logo ProLimp"
           className="login-logo"
         />
-
+        </a>
         <h2>Painel Administrativo</h2>
         <p>Acesse para gerenciar os produtos ProLimp</p>
 

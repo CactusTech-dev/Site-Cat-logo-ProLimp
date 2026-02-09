@@ -48,11 +48,11 @@ export async function buscarProdutoPorId(req, res) {
  */
 export async function criarProduto(req, res) {
   try {
-    const { nome, preco, descricao } = req.body;
+    const { nome, descricao } = req.body;
 
-    if (!nome || !preco) {
+    if (!nome) {
       return res.status(400).json({
-        erro: "Nome e preço são obrigatórios"
+        erro: "Nome é obrigatório"
       });
     }
 
@@ -62,7 +62,6 @@ export async function criarProduto(req, res) {
 
     const produto = await produtoRepository.criar({
       nome,
-      preco,
       descricao,
       imagem
     });
@@ -83,7 +82,7 @@ export async function criarProduto(req, res) {
 export async function atualizarProduto(req, res) {
   try {
     const { id } = req.params;
-    const { nome, preco, descricao } = req.body;
+    const { nome, descricao } = req.body;
 
     const produtoExistente = await produtoRepository.buscarPorId(id);
 
@@ -99,7 +98,6 @@ export async function atualizarProduto(req, res) {
 
     const produtoAtualizado = await produtoRepository.atualizar(id, {
       nome: nome ?? produtoExistente.nome,
-      preco: preco ?? produtoExistente.preco,
       descricao: descricao ?? produtoExistente.descricao,
       imagem
     });

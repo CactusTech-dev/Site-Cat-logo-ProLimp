@@ -60,7 +60,14 @@ const Catalogo = ({ tema, toggleTema }) => {
             <div key={produto.id} className="card-produto" onClick={() => abrirModal(produto)}>
               <div className="img-container">
                 {produto.imagem ? (
-                  <img src={produto.imagem} alt={produto.nome} />
+                  <img
+                    src={
+                      produto.imagem.startsWith('http')
+                        ? produto.imagem
+                        : `http://localhost:3000${produto.imagem}`
+                    }
+                    alt={produto.nome}
+                  />
                 ) : (
                   <div className="sem-foto">Sem Imagem</div>
                 )}
@@ -87,7 +94,14 @@ const Catalogo = ({ tema, toggleTema }) => {
             
             <div className="modal-container">
               <div className="modal-img-box">
-                <img src={produtoSelecionado.imagem} alt={produtoSelecionado.nome} />
+                <img
+                    src={
+                      produtoSelecionado.imagem.startsWith('http')
+                        ? produto.imagem
+                        : `http://localhost:3000${produtoSelecionado.imagem}`
+                    }
+                    alt={produtoSelecionado.nome}
+                  />
               </div>
 
               <div className="modal-info">

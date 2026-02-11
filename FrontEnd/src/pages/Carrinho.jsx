@@ -9,25 +9,11 @@ const Carrinho = () => {
   const navigate = useNavigate();
   
   // Estados locais apenas para o formulário de envio
-  const [nomeCliente, setNomeCliente] = useState('');
-  const [observacoes, setObservacoes] = useState('');
-
-  //Formata o texto e abre o link do WhatsApp
-  const enviarOrçamentoWhatsApp = () => {
-    const meuNumero = "5585999999999"; // Seu número comercial
-    let mensagem = `*SOLICITAÇÃO DE ORÇAMENTO - PROLIMP*\n\n`;
-    mensagem += `*De:* ${nomeCliente || 'Cliente não identificado'}\n`;
-    mensagem += `*Obs:* ${observacoes || 'Nenhuma'}\n\n`;
-    mensagem += `*ITENS:*\n`;
-
-    carrinho.forEach(item => {
-      mensagem += `• ${item.quantidade}x ${item.nome}\n`;
-    });
-
-    // O encodeURIComponent transforma espaços e quebras de linha para formato de URL
-    const url = `https://wa.me/${meuNumero}?text=${encodeURIComponent(mensagem)}`;
-    window.open(url, '_blank');
-  };
+  const [form, setForm] = useState({
+    ident: '',
+    numero: '',        // ✅ ADICIONE ISTO
+    observacao: ''
+  });
 
   //Gera um arquivo TXT para download imediato
   const baixarArquivoPedido = () => {
@@ -45,6 +31,52 @@ const Carrinho = () => {
     link.download = `pedido_prolimp_${nomeCliente || 'vendas'}.txt`;
     link.click();
   };
+
+  const enviarPedido = async () => {
+
+    if (!form.numero) {
+      alert('Informe um telefone para contato');
+      return;
+    }
+
+    const pedido = {
+      ident: form.ident || 'Cliente não identificado',
+      observacao: form.observacao,
+      numero: form.numero,
+      produtos: carrinho.map(item => ({
+        id: item.id,
+        nome: item.nome,
+        quantidade: item.quantidade,
+        imagem: item.imagem
+      }))
+    };
+
+    await fetch('http://localhost:3000/api/pedidos', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(pedido)
+    });
+
+    // WhatsApp (continua igual)
+    const meuNumero = "5585999999999";
+    let mensagem = `*SOLICITAÇÃO DE ORÇAMENTO - PROLIMP*\n\n`;
+    mensagem += `*De:* ${pedido.ident}\n`;
+    mensagem += `*Obs:* ${pedido.observacao || 'Nenhuma'}\n\n`;
+    mensagem += `*ITENS:*\n`;
+
+    carrinho.forEach(item => {
+      mensagem += `• ${item.quantidade}x ${item.nome}\n`;
+    });
+
+    const url = `https://wa.me/${meuNumero}?text=${encodeURIComponent(mensagem)}`;
+    window.open(url, '_blank');
+
+    clear();
+};
+
+
 
   if (carrinho.length === 0) {
     return (
@@ -71,7 +103,14 @@ const Carrinho = () => {
         <section className="lista-produtos-orcamento">
           {carrinho.map(item => (
             <div key={item.id} className="item-orcamento-card">
-              <img src={item.imagem || 'https://via.placeholder.com/80'} alt={item.nome} />
+              <img
+                    src={
+                      item.imagem.startsWith('http')
+                        ? item.imagem
+                        : `http://localhost:3000${item.imagem}`
+                    }
+                    alt={item.nome}
+                  />
               <div className="item-detalhes">
                 <h3>{item.nome}</h3>
                 <div className="item-qtd-control">
@@ -92,18 +131,27 @@ const Carrinho = () => {
             <h3>Dados do Pedido</h3>
             <div className="input-group">
               <label>Nome ou Empresa:</label>
-              <input 
-                type="text" 
-                value={nomeCliente} 
-                onChange={(e) => setNomeCliente(e.target.value)}
+              <input
+                type="text"
+                value={form.ident}
+                onChange={(e) => setForm({ ...form, ident: e.target.value })}
                 placeholder="Ex: Supermercado Pacatuba"
               />
             </div>
             <div className="input-group">
+              <label>Telefone:</label>
+              <input
+                type="text"
+                value={form.numero}
+                onChange={(e) => setForm({ ...form, numero: e.target.value })}
+                placeholder="(xx) xxxxx-xxxx"
+              />
+            </div>
+            <div className="input-group">
               <label>Observações Adicionais:</label>
-              <textarea 
-                value={observacoes} 
-                onChange={(e) => setObservacoes(e.target.value)}
+              <textarea
+                value={form.observacao}
+                onChange={(e) => setForm({ ...form, observacao: e.target.value })}
                 placeholder="Ex: Entregar após as 14h..."
               />
             </div>
@@ -113,7 +161,7 @@ const Carrinho = () => {
               <strong>{totalItens}</strong>
             </div>
 
-            <button className="btn-action-whatsapp" onClick={enviarOrçamentoWhatsApp}>
+            <button className="btn-action-whatsapp" onClick={enviarPedido}>
               <FaWhatsapp /> Solicitar via WhatsApp
             </button>
             <button className="btn-action-txt" onClick={baixarArquivoPedido}>

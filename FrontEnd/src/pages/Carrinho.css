@@ -45,9 +45,9 @@
 }
 
 .item-orcamento-card img {
-  width: 90px !important;
-  height: 90px !important;
-  object-fit: cover;
+  width: 50%;
+  height: 200px;
+  object-fit: contain;  
   border-radius: 8px;
   flex-shrink: 0; 
 }

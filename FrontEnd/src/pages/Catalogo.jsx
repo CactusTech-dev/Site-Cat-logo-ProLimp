@@ -97,7 +97,7 @@ const Catalogo = ({ tema, toggleTema }) => {
                 <img
                     src={
                       produtoSelecionado.imagem.startsWith('http')
-                        ? produto.imagem
+                        ? produtoSelecionado.imagem
                         : `http://localhost:3000${produtoSelecionado.imagem}`
                     }
                     alt={produtoSelecionado.nome}

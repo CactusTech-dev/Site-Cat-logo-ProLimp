@@ -58,7 +58,7 @@ export async function criarProduto(req, res) {
 
     const imagem = req.file
       ? `/uploads/produtos/${req.file.filename}`
-      : null;
+      : req.body.imagem || null;
 
     const produto = await produtoRepository.criar({
       nome,
@@ -94,7 +94,7 @@ export async function atualizarProduto(req, res) {
 
     const imagem = req.file
       ? `/uploads/produtos/${req.file.filename}`
-      : produtoExistente.imagem;
+      : req.body.imagem || produtoExistente.imagem;
 
     const produtoAtualizado = await produtoRepository.atualizar(id, {
       nome: nome ?? produtoExistente.nome,

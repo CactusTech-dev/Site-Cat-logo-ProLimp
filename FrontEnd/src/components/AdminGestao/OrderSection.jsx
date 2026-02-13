@@ -1,9 +1,10 @@
 import React from 'react';
 import { FaTrash, FaArrowLeft } from 'react-icons/fa';
+import './OrderSection.css';
 
 const OrderSection = ({ pedidos, onVoltar, onCancelar }) => {
   return (
-    <div className="admin-list-container">
+    <div className="admin-list-container order-section-container">
       <div className="admin-header-min">
         <button className="btn-voltar-simples" onClick={onVoltar}>
           <FaArrowLeft /> Voltar

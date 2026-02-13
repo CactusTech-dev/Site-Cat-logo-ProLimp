@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaEdit, FaTrash, FaArrowLeft } from 'react-icons/fa';
+import './ProductList.css'; 
 
 const ProductList = ({ produtos, aba, onVoltar, onEdit, onDelete }) => {
   return (

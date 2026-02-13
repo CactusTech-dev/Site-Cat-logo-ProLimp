@@ -1,0 +1,158 @@
+/* ==========================================================================
+   1. CONTAINER DE PEDIDOS
+   ========================================================================== */
+.order-section-container.admin-list-container {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 1100px; /* Mais largo para acomodar todas as colunas de pedidos */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  animation: fadeIn 0.4s ease-out;
+}
+
+/* ==========================================================================
+   2. TABELA DE PEDIDOS
+   ========================================================================== */
+.admin-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 15px;
+}
+
+.admin-table thead th {
+  color: #64748b;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 10px 15px;
+}
+
+.admin-table tbody tr {
+  background: #f8fafc;
+  transition: all 0.2s ease;
+}
+
+.admin-table tbody tr:hover {
+  background: #ffffff;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.admin-table td {
+  padding: 20px 15px;
+  vertical-align: middle;
+  border-top: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.admin-table td:first-child { border-left: 1px solid #e2e8f0; border-radius: 12px 0 0 12px; font-weight: 700; color: #151a2d; }
+.admin-table td:last-child { border-right: 1px solid #e2e8f0; border-radius: 0 12px 12px 0; }
+
+/* Célula de Observação */
+.obs-cell {
+  max-width: 180px;
+  font-size: 0.85rem;
+  color: #64748b;
+  font-style: italic;
+}
+
+/* ==========================================================================
+   3. LISTA DE PRODUTOS DENTRO DO PEDIDO
+   ========================================================================== */
+.order-prod-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.order-prod-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  color: #1e293b;
+  background: white;
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: 1px solid #f1f5f9;
+}
+
+.badge-qtd {
+  background: #2563eb;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-weight: 800;
+  font-size: 0.75rem;
+}
+
+.img-admin-mini {
+  width: 35px;
+  height: 35px;
+  object-fit: contain;
+  border-radius: 4px;
+  margin-left: auto; /* Joga a imagem para o final do item */
+}
+
+/* ==========================================================================
+   4. BOTÃO CONCLUIR (Ação Positiva)
+   ========================================================================== */
+.btn-delete { /* Mantive o nome da classe do seu JSX, mas o estilo é de conclusão */
+  background: #10b981; /* Verde Sucesso */
+  color: white;
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: none;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.2);
+}
+
+.btn-delete:hover {
+  background: #059669;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.4);
+}
+
+/* ==========================================================================
+   5. DARK MODE (Sincronizado)
+   ========================================================================== */
+.dark .order-section-container.admin-list-container {
+  background: #1e293b;
+}
+
+.dark .admin-table thead th { color: #94a3b8; }
+
+.dark .admin-table tbody tr {
+  background: #0f172a;
+}
+
+.dark .admin-table td {
+  border-color: #151a2d;
+  color: #f8fafc;
+}
+
+.dark .order-prod-list li {
+  background: #1e293b;
+  border-color: #334155;
+  color: #e2e8f0;
+}
+
+.dark .badge-qtd {
+  background: #3b82f6;
+}
+
+.dark .btn-delete {
+  background: #059669;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; }
+}

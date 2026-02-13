@@ -1,0 +1,182 @@
+/* ==========================================================================
+   1. CONTAINER PRINCIPAL (Igual ao ProductForm)
+   ========================================================================== */
+.admin-list-container {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 900px; /* Um pouco mais largo para acomodar a tabela */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  animation: fadeIn 0.4s ease-out;
+}
+
+/* Título da Seção */
+.admin-header-min h1 {
+  color: #151a2d;
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-top: 10px;
+  text-align: left;
+}
+
+/* ==========================================================================
+   2. TABELA COM ESTILO DE CARDS
+   ========================================================================== */
+.admin-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 12px; /* Cria o espaço entre as linhas */
+  margin-top: 20px;
+}
+
+.admin-table thead th {
+  color: #64748b;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 10px 20px;
+  border: none;
+}
+
+.admin-table tbody tr {
+  background: #f8fafc; /* Fundo suave para as linhas */
+  transition: all 0.2s ease;
+}
+
+.admin-table tbody tr:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  background: #ffffff; /* Fica branco puro no hover */
+}
+
+/* Arredondamento das bordas das linhas */
+.admin-table td {
+  padding: 15px 20px;
+  border-top: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
+  vertical-align: middle;
+}
+
+.admin-table td:first-child {
+  border-left: 1px solid #e2e8f0;
+  border-radius: 12px 0 0 12px;
+}
+
+.admin-table td:last-child {
+  border-right: 1px solid #e2e8f0;
+  border-radius: 0 12px 12px 0;
+}
+
+/* Nome do Produto */
+.product-name-cell {
+  font-weight: 700;
+  color: #151a2d;
+}
+
+/* Imagem na Tabela */
+.img-admin-container {
+  width: 60px;
+  height: 60px;
+  object-fit: contain; /* Não corta a foto do produto */
+  border-radius: 8px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  padding: 4px;
+}
+
+/* ==========================================================================
+   3. BOTÕES DE AÇÃO (EDITAR / EXCLUIR)
+   ========================================================================== */
+.btn-edit, .btn-delete {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+/* Estilo Editar (Azul ProLimp) */
+.btn-edit {
+  background: #2563eb;
+  color: white;
+}
+
+.btn-edit:hover {
+  background: #1d4ed8;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+/* Estilo Excluir (Vermelho Alerta) */
+.btn-delete {
+  background: #fee2e2;
+  color: #ef4444;
+}
+
+.btn-delete:hover {
+  background: #ef4444;
+  color: white;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+/* ==========================================================================
+   4. DARK MODE (Totalmente Sincronizado)
+   ========================================================================== */
+.dark .admin-list-container {
+  background: #1e293b; /* Cor do card no Dark Mode */
+}
+
+.dark .admin-header-min h1 {
+  color: white;
+}
+
+.dark .admin-table thead th {
+  color: #94a3b8;
+}
+
+.dark .admin-table tbody tr {
+  background: #0f172a; /* Fundo dos inputs no dark mode */
+}
+
+.dark .admin-table tbody tr:hover {
+  background: #151a2d;
+}
+
+.dark .admin-table td {
+  border-color: #151a2d; /* Borda escura para sumir com o contorno */
+  color: #f8fafc;
+}
+
+.dark .img-admin-container {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+.dark .btn-edit {
+  background: #3b82f6;
+}
+
+.dark .btn-delete {
+  background: rgba(239, 68, 68, 0.1);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.dark .btn-delete:hover {
+  background: #ef4444;
+  color: white;
+}
+
+/* Animações */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

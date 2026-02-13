@@ -1,0 +1,128 @@
+/* Container do Card */
+.product-form-container.admin-card {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 550px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+}
+
+/* Estrutura do Formulário */
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+
+.input-group label {
+  font-weight: 600;
+  color: #475569;
+  font-size: 0.9rem;
+}
+
+.input-group input, 
+.input-group textarea {
+  padding: 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+/* Seleção de Tipo (Link vs Arquivo) */
+.radio-group-premium {
+  display: flex;
+  gap: 12px;
+  margin: 10px 0;
+}
+
+.radio-group-premium label {
+  flex: 1;
+  padding: 12px;
+  border: 2px solid #f1f5f9;
+  border-radius: 12px;
+  cursor: pointer;
+  text-align: center;
+  font-weight: 600;
+  transition: all 0.2s;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.radio-group-premium label.active {
+  border-color: #2563eb;
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.radio-group-premium input {
+  display: none;
+}
+
+/* Input de Arquivo Customizado */
+.file-input-wrapper {
+  background: #f8fafc;
+  border: 2px dashed #cbd5e1;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+/* Botão Salvar */
+.btn-salvar {
+  background: #2563eb;
+  color: white;
+  padding: 16px;
+  border-radius: 12px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.2s;
+}
+
+.btn-salvar:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+/* DARK MODE - Seletor inteligente */
+.dark .admin-card.product-form-container {
+  background: #1e293b;
+  color: white;
+}
+
+.dark .input-group label { color: #94a3b8; }
+
+.dark .input-group input, 
+.dark .input-group textarea {
+  background: #ffffff;
+  border-color: #151a2d;
+  color: #151a2d;
+}
+
+.dark .radio-group-premium label {
+  border-color: #151a2d;
+  color: #94a3b8;
+}
+
+.dark .radio-group-premium label.active {
+  background: #007bff;
+}

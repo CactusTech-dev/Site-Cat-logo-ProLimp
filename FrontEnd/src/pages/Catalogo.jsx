@@ -64,7 +64,7 @@ const Catalogo = ({ tema, toggleTema }) => {
                     src={
                       produto.imagem.startsWith('http')
                         ? produto.imagem
-                        : `${import.meta.env.VITE_API_URL}${produtoSelecionado.imagem}`
+                        : `${import.meta.env.VITE_API_URL}/uploads/${produto.imagem.replace(/^\//, '')}`
                     }
                     alt={produto.nome}
                   />

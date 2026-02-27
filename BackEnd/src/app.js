@@ -15,7 +15,7 @@ const app = express();
 app.use(cors({
   origin: [
     "http://localhost:5173", // Vite local
-    "https://site-cat-logo-pro-limp-backend.vercel.app" // Front em produção
+    "https://site-cat-logo-pro-limp-frontend.vercel.app" // Front em produção
   ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true

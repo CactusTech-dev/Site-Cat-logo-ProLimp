@@ -98,7 +98,7 @@ const Admin = ({ setAutenticado }) => {
       {/* MENU PRINCIPAL */}
       {aba === 'menu' && (
         <div className="admin-dashboard">
-          <a href='http://localhost:5173/'>
+          <a href='/'>
           <img src={logo} alt="Logo" className="admin-logo" />
           </a>
           <h1>Gestão de Produtos</h1>

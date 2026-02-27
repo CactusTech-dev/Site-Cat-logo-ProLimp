@@ -14,7 +14,7 @@ const Catalogo = ({ tema, toggleTema }) => {
   useEffect(() => {
     async function carregarProdutos() {
       try {
-        const response = await fetch('http://localhost:3000/api/produtos');
+        const response = await fetch('/api/produtos');
         const data = await response.json();
         setProdutos(data);
       } catch (error) {
@@ -64,7 +64,7 @@ const Catalogo = ({ tema, toggleTema }) => {
                     src={
                       produto.imagem.startsWith('http')
                         ? produto.imagem
-                        : `http://localhost:3000${produto.imagem}`
+                        : produto.imagem
                     }
                     alt={produto.nome}
                   />

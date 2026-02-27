@@ -51,7 +51,7 @@ const Carrinho = () => {
       }))
     };
 
-    await fetch('http://localhost:3000/api/pedidos', {
+    await fetch('/api/pedidos', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -107,7 +107,7 @@ const Carrinho = () => {
                     src={
                       item.imagem.startsWith('http')
                         ? item.imagem
-                        : `http://localhost:3000${item.imagem}`
+                        : item.imagem
                     }
                     alt={item.nome}
                   />

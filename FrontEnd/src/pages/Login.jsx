@@ -23,7 +23,7 @@ const Login = ({ setAutenticado }) => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:3000/api/admin/login', {
+      const response = await fetch('/api/admin/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -52,7 +52,7 @@ const Login = ({ setAutenticado }) => {
   return (
     <div className="login-page">
       <div className="login-card">
-        <a href='http://localhost:5173/'>
+        <a href='/'>
         <img
           src={logoProlimp}
           alt="Logo ProLimp"

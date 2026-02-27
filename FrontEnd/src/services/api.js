@@ -58,7 +58,7 @@ export const pedidoService = {
   },
 
   criar: async (dadosPedido) => {
-    const res = await fetch(`${BASE_URL}/pedido`, {
+    const res = await fetch(`${BASE_URL}/criarPedido`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' }, // Sem token, pois o cliente não loga
       body: JSON.stringify(dadosPedido)

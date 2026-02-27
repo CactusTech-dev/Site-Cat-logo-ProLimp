@@ -1,4 +1,4 @@
-const BASE_URL = '/api';
+const BASE_URL = `${import.meta.env.VITE_API_URL}/api`;
 
 const getHeaders = (isFormData = false) => {
   const token = localStorage.getItem('token');
@@ -16,28 +16,32 @@ const getHeaders = (isFormData = false) => {
 };
 
 export const produtoService = {
+  // Acesso Público (Catálogo e Admin List)
   listar: async () => {
     const res = await fetch(`${BASE_URL}/produtos`);
+    if (!res.ok) throw new Error('Falha ao carregar produtos');
     return res.json();
   },
 
+  // Acesso Protegido (Só Admin)
   salvar: async (formData, id = null) => {
     const url = id ? `${BASE_URL}/produtos/${id}` : `${BASE_URL}/produtos`;
     const method = id ? 'PUT' : 'POST';
     
     const res = await fetch(url, {
       method,
-      headers: getHeaders(true), 
+      headers: getHeaders(true), // Envia o Token
       body: formData
     });
     return res.json();
   },
 
   excluir: async (id) => {
-    return fetch(`${BASE_URL}/produtos/${id}`, {
+    const res = await fetch(`${BASE_URL}/produtos/${id}`, {
       method: 'DELETE',
-      headers: getHeaders()
+      headers: getHeaders() // Envia o Token
     });
+    return res.json();
   }
 };
 

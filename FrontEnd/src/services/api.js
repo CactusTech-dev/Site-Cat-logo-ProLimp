@@ -53,7 +53,7 @@ export const produtoService = {
 
 export const pedidoService = {
   listar: async () => {
-    const res = await fetch(`${BASE_URL}/pedidos`);
+    const res = await fetch(`${BASE_URL}/listarPedidos`);
     return res.json();
   },
 
@@ -68,7 +68,7 @@ export const pedidoService = {
   },
 
   cancelar: async (id) => {
-    return fetch(`${BASE_URL}/pedidos/${id}`, {
+    return fetch(`${BASE_URL}/cancelarPedido/${id}`, {
       method: 'DELETE',
       headers: getHeaders()
     });

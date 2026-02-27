@@ -14,7 +14,7 @@ const Catalogo = ({ tema, toggleTema }) => {
   useEffect(() => {
     async function carregarProdutos() {
       try {
-        const response = await fetch('/api/produtos');
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/produtos`);
         const data = await response.json();
         setProdutos(data);
       } catch (error) {
@@ -64,7 +64,7 @@ const Catalogo = ({ tema, toggleTema }) => {
                     src={
                       produto.imagem.startsWith('http')
                         ? produto.imagem
-                        : produto.imagem
+                        : `${import.meta.env.VITE_API_URL}${produtoSelecionado.imagem}`
                     }
                     alt={produto.nome}
                   />
@@ -98,7 +98,7 @@ const Catalogo = ({ tema, toggleTema }) => {
                     src={
                       produtoSelecionado.imagem.startsWith('http')
                         ? produtoSelecionado.imagem
-                        : `http://localhost:3000${produtoSelecionado.imagem}`
+                        : `${import.meta.env.VITE_API_URL}${produtoSelecionado.imagem}`
                     }
                     alt={produtoSelecionado.nome}
                   />

@@ -12,7 +12,15 @@ const __dirname = path.dirname(__filename);
 const app = express();
 
 // Middlewares globais
-app.use(cors());
+app.use(cors({
+  origin: [
+    "http://localhost:5173", // Vite local
+    "https://site-cat-logo-pro-limp-backend.vercel.app" // Front em produção
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

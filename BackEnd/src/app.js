@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
 // Rotas da API
-app.use("/api", routes);
+app.use(routes);
 
 // Rota teste (opcional)
 app.get("/", (req, res) => {

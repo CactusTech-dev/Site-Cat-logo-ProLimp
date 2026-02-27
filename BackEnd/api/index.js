@@ -1,3 +1,2 @@
-export default function handler(req, res) {
-  res.status(200).json({ backend: "funcionando" });
-}
+import app from "../src/app.js";
+export default app;

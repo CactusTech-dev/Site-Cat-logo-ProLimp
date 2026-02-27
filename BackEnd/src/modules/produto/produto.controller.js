@@ -48,31 +48,26 @@ export async function buscarProdutoPorId(req, res) {
  */
 export async function criarProduto(req, res) {
   try {
-    const { nome, descricao } = req.body;
+    const { nome, descricao, imagem } = req.body;
 
     if (!nome) {
-      return res.status(400).json({
-        erro: "Nome é obrigatório"
-      });
+      return res.status(400).json({ erro: "Nome é obrigatório" });
     }
 
-    const imagem = req.file
-      ? `/uploads/produtos/${req.file.filename}`
-      : req.body.imagem || null;
-
+    // Passamos os dados básicos e o arquivo separado (req.file)
+    // O Repository vai decidir: se houver req.file, faz upload. 
+    // Se não, usa o link de req.body.imagem.
     const produto = await produtoRepository.criar({
       nome,
       descricao,
-      imagem
-    });
+      imagem: imagem || null
+    }, req.file); 
 
     return res.status(201).json(produto);
 
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({
-      erro: "Erro ao criar produto"
-    });
+    console.error('ERRO AO CRIAR:', error);
+    return res.status(500).json({ erro: error.message || "Erro ao criar produto" });
   }
 }
 
@@ -82,33 +77,26 @@ export async function criarProduto(req, res) {
 export async function atualizarProduto(req, res) {
   try {
     const { id } = req.params;
-    const { nome, descricao } = req.body;
+    const { nome, descricao, imagem } = req.body;
 
     const produtoExistente = await produtoRepository.buscarPorId(id);
 
     if (!produtoExistente) {
-      return res.status(404).json({
-        erro: "Produto não encontrado"
-      });
+      return res.status(404).json({ erro: "Produto não encontrado" });
     }
 
-    const imagem = req.file
-      ? `/uploads/produtos/${req.file.filename}`
-      : req.body.imagem || produtoExistente.imagem;
-
+    // Passamos id, dados e o arquivo (req.file) para o novo Repository
     const produtoAtualizado = await produtoRepository.atualizar(id, {
       nome: nome ?? produtoExistente.nome,
       descricao: descricao ?? produtoExistente.descricao,
-      imagem
-    });
+      imagem: imagem ?? produtoExistente.imagem
+    }, req.file);
 
     return res.json(produtoAtualizado);
 
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({
-      erro: "Erro ao atualizar produto"
-    });
+    console.error('ERRO AO ATUALIZAR:', error);
+    return res.status(500).json({ erro: error.message || "Erro ao atualizar produto" });
   }
 }
 

@@ -1,21 +1,9 @@
 import multer from "multer";
-import path from "path";
 
-// define onde e como salvar
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "uploads/produtos");
-  },
+// ✅ ALTERAÇÃO VITAL: Usar memoryStorage para não tentar gravar no disco da Vercel
+const storage = multer.memoryStorage();
 
-  filename: (req, file, cb) => {
-    const ext = path.extname(file.originalname);
-    const nome = Date.now() + ext;
-
-    cb(null, nome);
-  }
-});
-
-// filtro de tipo de arquivo
+// filtro de tipo de arquivo (mantemos o seu, que está ótimo!)
 function fileFilter(req, file, cb) {
   if (
     file.mimetype === "image/jpeg" ||
@@ -29,7 +17,7 @@ function fileFilter(req, file, cb) {
 }
 
 export const uploadProduto = multer({
-  storage,
+  storage, // Agora usando memória
   fileFilter,
   limits: {
     fileSize: 2 * 1024 * 1024 // 2MB

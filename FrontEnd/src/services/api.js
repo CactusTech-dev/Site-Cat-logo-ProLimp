@@ -53,12 +53,12 @@ export const produtoService = {
 
 export const pedidoService = {
   listar: async () => {
-    const res = await fetch(`${BASE_URL}/listarPedidos`);
+    const res = await fetch(`${BASE_URL}/pedidos`);
     return res.json();
   },
 
   criar: async (dadosPedido) => {
-    const res = await fetch(`${BASE_URL}/criarPedido`, {
+    const res = await fetch(`${BASE_URL}/pedidos`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' }, // Sem token, pois o cliente não loga
       body: JSON.stringify(dadosPedido)
@@ -68,7 +68,7 @@ export const pedidoService = {
   },
 
   cancelar: async (id) => {
-    return fetch(`${BASE_URL}/cancelarPedido/${id}`, {
+    return fetch(`${BASE_URL}/pedido/${id}`, {
       method: 'DELETE',
       headers: getHeaders()
     });

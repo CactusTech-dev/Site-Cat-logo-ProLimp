@@ -36,13 +36,19 @@ export const produtoService = {
     return res.json();
   },
 
-  excluir: async (id) => {
-    const res = await fetch(`${BASE_URL}/produtos/${id}`, {
-      method: 'DELETE',
-      headers: getHeaders() // Envia o Token
-    });
-    return res.json();
-  }
+    excluir: async (id) => {
+      const res = await fetch(`${BASE_URL}/produtos/${id}`, {
+        method: 'DELETE',
+        headers: getHeaders() // Já inclui o Bearer Token e o Content-Type JSON
+      });
+
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.erro || 'Erro ao excluir produto');
+      }
+      
+      return res; // Retorna a resposta para o componente tratar
+    }
 };
 
 export const pedidoService = {

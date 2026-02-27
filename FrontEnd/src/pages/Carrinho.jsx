@@ -32,17 +32,26 @@ const Carrinho = () => {
     link.click();
   };
 
-  const enviarPedido = async () => {
+const enviarPedido = async () => {
+  // 1. Validações básicas
+  if (!form.ident.trim()) {
+    alert('Por favor, informe seu nome ou empresa.');
+    return;
+  }
+  if (!form.numero.trim()) {
+    alert('Informe um telefone para contato.');
+    return;
+  }
+  if (carrinho.length === 0) return;
 
-    if (!form.numero) {
-      alert('Informe um telefone para contato');
-      return;
-    }
-
+  try {
+    // 2. Montagem do objeto (igual ao que o seu Controller espera)
     const pedido = {
-      ident: form.ident || 'Cliente não identificado',
-      observacao: form.observacao,
+      ident: form.ident,
       numero: form.numero,
+      observacao: form.observacao,
+      // Convertemos o array para string se o seu banco não for JSONB, 
+      // mas o ideal é enviar como objeto e o repository tratar.
       produtos: carrinho.map(item => ({
         id: item.id,
         nome: item.nome,
@@ -51,7 +60,10 @@ const Carrinho = () => {
       }))
     };
 
-    await fetch('/api/pedidos', {
+    // 3. Envio para a API (Ajuste a URL conforme seu BASE_URL do services/api.js)
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+    
+    const response = await fetch(`${API_URL}/api/pedido`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -59,10 +71,15 @@ const Carrinho = () => {
       body: JSON.stringify(pedido)
     });
 
-    // WhatsApp (continua igual)
-    const meuNumero = "5585999999999";
+    if (!response.ok) {
+      throw new Error('Falha ao registrar pedido no servidor.');
+    }
+
+    // 4. Se deu certo no banco, agora abre o WhatsApp
+    const meuNumero = "5585999999999"; // Substitua pelo seu número real
     let mensagem = `*SOLICITAÇÃO DE ORÇAMENTO - PROLIMP*\n\n`;
     mensagem += `*De:* ${pedido.ident}\n`;
+    mensagem += `*Contato:* ${pedido.numero}\n`;
     mensagem += `*Obs:* ${pedido.observacao || 'Nenhuma'}\n\n`;
     mensagem += `*ITENS:*\n`;
 
@@ -70,13 +87,38 @@ const Carrinho = () => {
       mensagem += `• ${item.quantidade}x ${item.nome}\n`;
     });
 
-    const url = `https://wa.me/${meuNumero}?text=${encodeURIComponent(mensagem)}`;
-    window.open(url, '_blank');
+    const urlWhatsapp = `https://wa.me/${meuNumero}?text=${encodeURIComponent(mensagem)}`;
+    
+    alert('Pedido registrado com sucesso! Redirecionando para o WhatsApp...');
+    window.open(urlWhatsapp, '_blank');
 
+    // 5. Limpa o carrinho e volta para o início
     clear();
+    navigate('/');
+
+  } catch (error) {
+    console.error('Erro no checkout:', error);
+    alert('Ocorreu um erro ao processar seu pedido. Tente novamente.');
+  }
 };
 
+const handleTelefoneChange = (e) => {
+  let value = e.target.value;
 
+  // 1. Remove tudo que não for número
+  value = value.replace(/\D/g, "");
+
+  // 2. Aplica a máscara (XX) XXXXX-XXXX
+  if (value.length <= 11) {
+    value = value.replace(/^(\d{2})(\d)/g, "($1) $2");
+    value = value.replace(/(\d{5})(\d)/, "$1-$2");
+  }
+
+  // 3. Limita a 11 dígitos (DDD + 9 dígitos)
+  if (value.length > 15) value = value.slice(0, 15);
+
+  setForm({ ...form, numero: value });
+};
 
   if (carrinho.length === 0) {
     return (
@@ -104,13 +146,11 @@ const Carrinho = () => {
           {carrinho.map(item => (
             <div key={item.id} className="item-orcamento-card">
               <img
-                    src={
-                      item.imagem.startsWith('http')
-                        ? item.imagem
-                        : item.imagem
-                    }
-                    alt={item.nome}
-                  />
+                src={item.imagem} // Simplificado, pois o link agora é absoluto do Supabase
+                alt={item.nome}
+                className="carrinho-item-img"
+                onError={(e) => e.target.src = '/caminho/para/imagem-padrao.png'}
+              />
               <div className="item-detalhes">
                 <h3>{item.nome}</h3>
                 <div className="item-qtd-control">
@@ -139,12 +179,13 @@ const Carrinho = () => {
               />
             </div>
             <div className="input-group">
-              <label>Telefone:</label>
+              <label>Telefone / WhatsApp:</label>
               <input
-                type="text"
+                type="text" // Usamos text para a máscara funcionar visualmente
                 value={form.numero}
-                onChange={(e) => setForm({ ...form, numero: e.target.value })}
-                placeholder="(xx) xxxxx-xxxx"
+                onChange={handleTelefoneChange}
+                placeholder="(85) 99999-9999"
+                maxLength="15" // Previne entradas gigantes
               />
             </div>
             <div className="input-group">

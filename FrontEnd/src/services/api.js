@@ -57,6 +57,16 @@ export const pedidoService = {
     return res.json();
   },
 
+  criar: async (dadosPedido) => {
+    const res = await fetch(`${BASE_URL}/pedido`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' }, // Sem token, pois o cliente não loga
+      body: JSON.stringify(dadosPedido)
+    });
+    if (!res.ok) throw new Error('Erro ao enviar pedido');
+    return res.json();
+  },
+
   cancelar: async (id) => {
     return fetch(`${BASE_URL}/pedidos/${id}`, {
       method: 'DELETE',

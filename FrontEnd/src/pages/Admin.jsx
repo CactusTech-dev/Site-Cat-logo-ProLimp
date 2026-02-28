@@ -77,7 +77,7 @@ const Admin = ({ setAutenticado }) => {
   };
 
   const handleCancelarPedido = async (id) => {
-    if (!window.confirm("Deseja realmente excluir este produto?")) return;
+    if (!window.confirm("Deseja realmente finalizar esse pedido?")) return;
     try {
       await pedidoService.cancelar(id);
       setPedidos(pedidos.filter(p => p.id !== id));

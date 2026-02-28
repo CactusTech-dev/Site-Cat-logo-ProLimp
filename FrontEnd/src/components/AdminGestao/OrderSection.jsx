@@ -68,7 +68,7 @@ const OrderSection = ({ pedidos, onVoltar, onCancelar }) => {
                   <td style={{ textAlign: 'right' }}>
                     <button 
                       className="btn-delete btn-concluir" 
-                      onClick={() => handleCancelarPedido(p.id)}
+                      onClick={() => onCancelar(p.id)}
                       title="Concluir e remover pedido"
                     >
                       <FaCheck /> Concluir

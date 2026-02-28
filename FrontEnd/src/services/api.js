@@ -68,7 +68,7 @@ export const pedidoService = {
   },
 
   cancelar: async (id) => {
-    return fetch(`${BASE_URL}/pedido/${id}`, {
+    return fetch(`${BASE_URL}/pedidos/${id}`, {
       method: 'DELETE',
       headers: getHeaders()
     });

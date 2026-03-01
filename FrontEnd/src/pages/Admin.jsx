@@ -50,19 +50,27 @@ const Admin = ({ setAutenticado }) => {
     try {
       const formData = new FormData();
       formData.append('nome', form.nome);
-      formData.append('descricao', form.desc);
-      formData.append('preco', 10);
+      formData.append('descricao', form.desc); // Verifique se o backend espera 'desc' ou 'descricao'
+      formData.append('preco', "0"); // Envie como string se for FormData
 
-      if (form.tipo === 'arquivo' && form.file) formData.append('imagem', form.file);
-      else formData.append('imagem', form.imagemUrl);
+      if (form.tipo === 'arquivo') {
+        if (form.file) {
+          formData.append('imagem', form.file); // Envia o arquivo físico
+        }
+      } else {
+        formData.append('imagemUrl', form.imagemUrl); // Envia a URL como string
+      }
 
+      // O segredo: passe o formData e o id
       await produtoService.salvar(formData, form.id);
       
-      setForm({ id: null, nome: '', desc: '', tipo: 'link', file: null });
+      alert('Sucesso!');
+      setForm({ id: null, nome: '', desc: '', tipo: 'link', imagemUrl: '', file: null });
       setAba('menu');
       carregarDados();
     } catch (error) {
-      alert('Erro ao salvar produto');
+      console.error(error);
+      alert('Erro ao salvar: ' + (error.message || 'Verifique os campos'));
     }
   };
 

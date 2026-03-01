@@ -27,7 +27,7 @@ const ProductList = ({ produtos, aba, onVoltar, onEdit, onDelete }) => {
               <td>
                 <img 
                   className='img-admin-container'
-                  src={p.imagem.startsWith('http') ? p.imagem : `http://localhost:3000${p.imagem}`}
+                  src={p.imagem.startsWith('http') ? p.imagem : `${BASE_URL}/produtos`}
                   alt={p.nome}
                 />
               </td>

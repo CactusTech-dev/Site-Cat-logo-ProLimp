@@ -62,7 +62,7 @@ const Carrinho = () => {
       await pedidoService.criar(dadosPedido);
 
       // 2. Prepara e abre o WhatsApp
-      const meuNumero = "5585999999999"; // Substitua pelo seu número
+      const meuNumero = "558588805100"; // Substitua pelo seu número
       let mensagem = `*SOLICITAÇÃO DE ORÇAMENTO - PROLIMP*\n\n`;
       mensagem += `*De:* ${dadosPedido.ident}\n`;
       mensagem += `*Contato:* ${form.numero}\n`;

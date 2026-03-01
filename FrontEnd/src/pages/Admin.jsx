@@ -45,34 +45,35 @@ const Admin = ({ setAutenticado }) => {
   /* ============================
      AÇÕES (PRODUTOS E PEDIDOS)
   ============================ */
-  const handleSave = async (e) => {
-    e.preventDefault();
-    try {
-      const formData = new FormData();
-      formData.append('nome', form.nome);
-      formData.append('descricao', form.desc); // Verifique se o backend espera 'desc' ou 'descricao'
-      formData.append('preco', "0"); // Envie como string se for FormData
+const handleSave = async (e) => {
+  e.preventDefault();
+  try {
+    const formData = new FormData();
+    formData.append('nome', form.nome);
+    formData.append('descricao', form.desc);
+    
+    // Se o seu banco exige preço, envie um número. Se não, verifique o backend.
+    formData.append('preco', "0"); 
 
-      if (form.tipo === 'arquivo') {
-        if (form.file) {
-          formData.append('imagem', form.file); // Envia o arquivo físico
-        }
-      } else {
-        formData.append('imagemUrl', form.imagemUrl); // Envia a URL como string
+    if (form.tipo === 'arquivo') {
+      if (form.file) {
+        formData.append('imagem', form.file); // O arquivo do upload
       }
-
-      // O segredo: passe o formData e o id
-      await produtoService.salvar(formData, form.id);
-      
-      alert('Sucesso!');
-      setForm({ id: null, nome: '', desc: '', tipo: 'link', imagemUrl: '', file: null });
-      setAba('menu');
-      carregarDados();
-    } catch (error) {
-      console.error(error);
-      alert('Erro ao salvar: ' + (error.message || 'Verifique os campos'));
+    } else {
+      formData.append('imagem', form.imagemUrl); // A URL externa
     }
-  };
+
+    await produtoService.salvar(formData, form.id);
+    
+    alert('Produto salvo com sucesso!');
+    // Limpeza completa do estado
+    setForm({ id: null, nome: '', desc: '', tipo: 'link', imagemUrl: '', file: null });
+    setAba('menu');
+    carregarDados();
+  } catch (error) {
+    alert(error.message);
+  }
+};
 
   const handleExcluir = async (id) => {
     if (!window.confirm("Deseja realmente excluir este produto?")) return;

@@ -27,8 +27,10 @@ const ProductList = ({ produtos, aba, onVoltar, onEdit, onDelete }) => {
               <td>
                 <img 
                   className='img-admin-container'
-                  src={p.imagem.startsWith('http') ? p.imagem : `${BASE_URL}/produtos`}
+                  // Se p.imagem já é a URL do Supabase ou Link Externo, use ela direto.
+                  src={p.imagem} 
                   alt={p.nome}
+                  onError={(e) => { e.target.src = 'https://via.placeholder.com/150?text=Sem+Imagem'; }}
                 />
               </td>
               <td style={{ textAlign: 'right' }}>

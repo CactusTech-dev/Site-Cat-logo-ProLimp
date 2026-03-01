@@ -2,12 +2,14 @@ const BASE_URL = `${import.meta.env.VITE_API_URL}/api`;
 
 const getHeaders = (isFormData = false) => {
   const token = localStorage.getItem('token');
-  const headers = {
-    'Authorization': `Bearer ${token}`
-  };
+  const headers = {};
   
-  // Se NÃO for FormData, precisamos avisar que é JSON
-  // O FormData o navegador já configura o Content-Type sozinho
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`;
+  }
+  
+  // IMPORTANTE: Para FormData, o fetch define o Content-Type + Boundary automaticamente.
+  // Se forçarmos 'application/json' ou deixarmos vazio, o backend não lê o arquivo.
   if (!isFormData) {
     headers['Content-Type'] = 'application/json';
   }
@@ -16,39 +18,37 @@ const getHeaders = (isFormData = false) => {
 };
 
 export const produtoService = {
-  // Acesso Público (Catálogo e Admin List)
   listar: async () => {
     const res = await fetch(`${BASE_URL}/produtos`);
     if (!res.ok) throw new Error('Falha ao carregar produtos');
     return res.json();
   },
 
-  // Acesso Protegido (Só Admin)
   salvar: async (formData, id = null) => {
     const url = id ? `${BASE_URL}/produtos/${id}` : `${BASE_URL}/produtos`;
     const method = id ? 'PUT' : 'POST';
     
     const res = await fetch(url, {
       method,
-      headers: getHeaders(true), // Envia o Token
+      headers: getHeaders(true), // Avisa que é FormData para não setar Content-Type
       body: formData
     });
+    
+    if (!res.ok) {
+      const errorData = await res.json();
+      throw new Error(errorData.erro || 'Erro ao salvar produto');
+    }
     return res.json();
   },
 
-    excluir: async (id) => {
-      const res = await fetch(`${BASE_URL}/produtos/${id}`, {
-        method: 'DELETE',
-        headers: getHeaders() // Já inclui o Bearer Token e o Content-Type JSON
-      });
-
-      if (!res.ok) {
-        const errorData = await res.json();
-        throw new Error(errorData.erro || 'Erro ao excluir produto');
-      }
-      
-      return res; // Retorna a resposta para o componente tratar
-    }
+  excluir: async (id) => {
+    const res = await fetch(`${BASE_URL}/produtos/${id}`, {
+      method: 'DELETE',
+      headers: getHeaders()
+    });
+    if (!res.ok) throw new Error('Erro ao excluir produto');
+    return res;
+  }
 };
 
 export const pedidoService = {

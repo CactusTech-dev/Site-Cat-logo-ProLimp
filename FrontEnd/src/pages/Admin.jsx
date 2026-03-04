@@ -126,10 +126,13 @@ const handleSave = async (e) => {
       {(aba === 'adicionar' || aba === 'edit-form') && (
         <ProductForm 
           form={form} setForm={setForm} onSave={handleSave} 
-          onVoltar={() => setAba('menu')} handleFile={(e) => setForm({ ...form, file: e.target.files[0] })} 
+          onVoltar={() => {
+                setForm({ id: null, nome: '', desc: '', tipo: 'link', imagemUrl: '', file: null }); // Limpa ao voltar
+                setAba('menu');
+              }} 
+          handleFile={(e) => setForm({ ...form, file: e.target.files[0] })}
         />
       )}
-
       {/* LISTAGEM */}
       {(aba === 'editar' || aba === 'excluir') && (
         <ProductList 

@@ -1,25 +1,5 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "src/app.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/uploads/(.*)",
-      "dest": "/uploads/$1"
-    },
-    {
-      "src": "/api/(.*)",
-      "dest": "src/app.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "src/app.js"
-    }
-  ],
   "rewrites": [
     {
       "source": "/api/(.*)",

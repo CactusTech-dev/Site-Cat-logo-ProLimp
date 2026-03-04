@@ -5,18 +5,14 @@
       "runtime": "@vercel/node"
     }
   },
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/(.*)",
-      "dest": "src/app.js"
+      "source": "/api/:path*",
+      "destination": "/src/app.js"
     },
     {
-      "src": "/assets/(.*)",
-      "dest": "/assets/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }

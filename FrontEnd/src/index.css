@@ -50,12 +50,37 @@ body {
 }
 
 @media (max-width: 768px) {
-  .main-content {
-    margin-left: 0 !important;
-    padding: 80px 15px 30px 15px; 
+  .layout-container {
+    display: block !important;
+    position: relative;
+    width: 100%;
   }
 
-  .layout-container {
-    display: block;
+  .main-content {
+    margin-left: 0 !important;
+    width: 100% !important;
+    padding: 80px 15px 30px 15px !important;
+    min-height: 100vh;
+  }
+
+  .sidebar {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 2000; 
+    transform: translateX(-100%); 
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+    width: 260px !important;
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5); 
+  }
+
+  .menu-toggle {
+    position: fixed !important;
+    z-index: 2100; 
   }
 }

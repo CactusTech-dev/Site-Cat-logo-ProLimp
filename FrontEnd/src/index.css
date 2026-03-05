@@ -40,12 +40,26 @@ body {
 }
 
 @media (min-width: 769px) {
-  .menu-open .main-content {
-    margin-left: 260px; 
+  .layout-container {
+    display: flex; 
+    width: 100%;
   }
-  
+
+  .sidebar {
+    position: sticky; 
+    top: 0;
+    height: 100vh;
+    z-index: 100;
+  }
+
+  .menu-open .main-content {
+    margin-left: 260px;
+    width: calc(100% - 260px);
+  }
+
   .menu-closed .main-content {
-    margin-left: 70px; 
+    margin-left: 70px;
+    width: calc(100% - 70px);
   }
 }
 

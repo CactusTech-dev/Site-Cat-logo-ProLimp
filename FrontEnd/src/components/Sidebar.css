@@ -35,13 +35,14 @@
 
 .sidebar-header {
   display: flex;
-  align-items: center;
-  gap: 15px; /* Espaço entre logo e texto */
-  margin-bottom: 40px;
-  color: #ffffff;
-  flex-shrink: 0;
+  flex-direction: column; 
+  align-items: center;    
+  justify-content: center;
+  gap: 15px;             
+  margin-bottom: 30px;
+  padding: 20px 10px;
   width: 100%;
-  overflow: visible; /* Garante que o texto apareça */
+  transition: all 0.3s ease;
 }
 
 .sidebar-content {
@@ -114,25 +115,34 @@
   object-fit: cover; 
   border: 2px solid #ffffff; 
   transition: all 0.3s ease;
-  flex-shrink: 0; /* Não deixa a logo esmagar */
+  flex-shrink: 0; 
 }
 
 .sidebar-logo.expanded {
-  width: 55px; /* Com 100px não sobra espaço para o texto na mesma linha */
-  height: 55px;
+  width: 85px;  
+  height: 85px;
+  margin-bottom: 5px;
 }
 
 .full-logo {
   font-weight: 900;
-  font-size: 1.5rem; /* 2.2rem era muito grande para ficar ao lado da logo */
-  color: #ffffff;    /* Mudei de azul para BRANCO para aparecer no fundo azul */
-  white-space: nowrap;
+  font-size: 1.6rem; 
+  color: #ffffff;    
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 2px; 
+  white-space: nowrap;
+  text-align: center;
+  width: 100%;
 }
 
 .social-link:hover .info-item {
-  background: rgba(255, 255, 255, 0.1); /* Um destaque leve em vez de mudar a cor do texto para escuro */
+  background: rgba(255, 255, 255, 0.1); 
   border-radius: 8px;
   color: #ffffff; 
+}
+
+.sidebar-logo.collapsed {
+  width: 45px;
+  height: 45px;
+  margin: 0 auto; 
 }

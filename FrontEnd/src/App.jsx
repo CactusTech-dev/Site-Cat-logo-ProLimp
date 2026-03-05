@@ -15,7 +15,7 @@ function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [tema, setTema] = useState(localStorage.getItem('tema') || 'light');
   const [autenticado, setAutenticado] = useState(false);
-  const emManutencao = true;
+  const emManutencao = false;
 
   const toggleTema = () => {
     const novoTema = tema === 'light' ? 'dark' : 'light';
@@ -48,7 +48,7 @@ function App() {
             <Route path="/" element={
               <div className="layout-container" style={{ display: 'flex' }}>
                 <Sidebar isOpen={isMenuOpen} setIsOpen={setIsMenuOpen} tema={tema} toggleTema={toggleTema} /> 
-                <main style={{ marginLeft: isMenuOpen ? '260px' : '70px', width: '100%', padding: '20px', transition: '0.3s', backgroundColor: 'var(--bg-page)', minHeight: '100vh' }}>
+                <main className={`main-content ${isMenuOpen ? 'menu-open' : 'menu-closed'}`}>
                   <Catalogo tema={tema} toggleTema={toggleTema} />
                 </main>
               </div>
@@ -57,7 +57,7 @@ function App() {
             <Route path="/carrinho" element={
               <div className="layout-container" style={{ display: 'flex' }}>
                 <Sidebar isOpen={isMenuOpen} setIsOpen={setIsMenuOpen} tema={tema} toggleTema={toggleTema} /> 
-                <main style={{ marginLeft: isMenuOpen ? '260px' : '70px', width: '100%', padding: '20px', transition: '0.3s', backgroundColor: 'var(--bg-page)', minHeight: '100vh' }}>
+                <main className={`main-content ${isMenuOpen ? 'menu-open' : 'menu-closed'}`}>
                   <Carrinho />
                 </main>
               </div>
@@ -66,7 +66,7 @@ function App() {
             <Route path="/sobre" element={
               <div className="layout-container" style={{ display: 'flex' }}>
                 <Sidebar isOpen={isMenuOpen} setIsOpen={setIsMenuOpen} tema={tema} toggleTema={toggleTema} /> 
-                <main style={{ marginLeft: isMenuOpen ? '260px' : '70px', transition: '0.3s', width: '100%', backgroundColor: 'var(--bg-page)', minHeight: '100vh' }}>
+                <main className={`main-content ${isMenuOpen ? 'menu-open' : 'menu-closed'}`}>
                   <Sobre />
                 </main>
               </div>

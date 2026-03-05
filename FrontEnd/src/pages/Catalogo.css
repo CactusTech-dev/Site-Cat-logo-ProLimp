@@ -218,3 +218,93 @@
   color: var(--text-main);
   opacity: 0.5;
 }
+
+@media (max-width: 768px) {
+  
+  .catalogo-page {
+    padding: 10px;
+  }
+
+  .catalogo-header {
+    margin-bottom: 20px;
+  }
+
+  .catalogo-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .produtos-grid {
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 12px; 
+  }
+
+  .card-produto {
+    border-radius: 8px; 
+  }
+
+  .img-container {
+    height: 140px; 
+  }
+
+  .img-container img {
+    width: 70%; 
+    height: 120px;
+  }
+
+  .card-info {
+    padding: 10px; /
+  }
+
+  .card-info h3 {
+    font-size: 0.9rem; 
+    margin-bottom: 5px;
+    height: 2.4em; 
+    overflow: hidden;
+  }
+
+  .card-footer {
+    padding-top: 10px;
+  }
+
+  .btn-whatsapp {
+    padding: 8px 10px;
+    font-size: 0.8rem;
+    width: 100%; 
+  }
+
+  .modal-content {
+    width: 95%;
+    padding: 15px;
+    max-height: 95vh;
+    overflow-y: auto; 
+  }
+
+  .modal-container {
+    flex-direction: column; 
+    gap: 10px;
+  }
+
+  .modal-img-box {
+    height: 180px; 
+    min-width: 100%;
+  }
+
+  .modal-info h2 {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  .modal-descricao {
+    font-size: 0.9rem;
+    margin: 10px 0;
+  }
+
+  .controles {
+    justify-content: center;
+  }
+
+  .controles button {
+    padding: 10px 15px; 
+    font-size: 1rem;
+  }
+}

@@ -197,20 +197,27 @@
 }
 
 .btn-limpar-tudo {
-  align-self: flex-start; 
-  margin-top: 10px;
-  background: none;
-  border: none;
+  align-self: flex-start;
+  margin-top: 15px;
+  background-color: transparent;
   color: #94a3b8;
-  font-size: 0.9rem;
-  font-weight: 500;
+  border: 1px solid #e2e8f0;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
   cursor: pointer;
-  text-decoration: underline;
-  transition: color 0.2s;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .btn-limpar-tudo:hover {
-  color: #ef4444; 
+  background-color: #fee2e2; 
+  color: #ef4444;           
+  border-color: #fecaca;
+  transform: translateY(-2px);
 }
 
 .carrinho-vazio-state {
@@ -262,4 +269,86 @@
 .dark .checkout-card input::placeholder,
 .dark .checkout-card textarea::placeholder {
   color: #94a3b8;
+}
+
+/* --- AJUSTES PARA CELULAR (MOBILE) --- */
+@media (max-width: 768px) {
+  
+  .carrinho-main-container {
+    padding: 20px 10px;
+  }
+
+  .carrinho-top-bar {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+
+  .carrinho-top-bar h1 {
+    font-size: 1.5rem;
+  }
+
+  .carrinho-layout {
+    grid-template-columns: 1fr; 
+    gap: 20px;
+  }
+
+  .item-orcamento-card {
+    flex-direction: column; 
+    padding: 15px;
+    text-align: center;
+  }
+
+  .item-orcamento-card img {
+    width: 100px; 
+    height: 100px;
+    margin: 0 auto;
+  }
+
+  .item-detalhes {
+    width: 100%;
+  }
+
+  .item-qtd-control {
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  .checkout-sidebar {
+    position: static; 
+    width: 100%;
+  }
+
+  .checkout-card {
+    padding: 20px 15px;
+  }
+
+  .checkout-card input, 
+  .checkout-card textarea {
+    font-size: 16px; 
+    padding: 15px;
+  }
+
+  .btn-action-whatsapp {
+    padding: 20px;
+    font-size: 1.1rem;
+  }
+
+  .btn-delete-item {
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn-delete-item::after {
+    content: " Remover Item"; 
+  }
+
+  .btn-limpar-tudo {
+    align-self: center;
+    margin-bottom: 20px;
+  }
 }

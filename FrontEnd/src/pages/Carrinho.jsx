@@ -143,7 +143,9 @@ const Carrinho = () => {
               </button>
             </div>
           ))}
-          <button className="btn-limpar-tudo" onClick={clear}>Limpar Carrinho</button>
+          <button className="btn-limpar-tudo" onClick={clear}>
+            <FaTrash size={12} /> Limpar Carrinho
+          </button>
         </section>
 
         <aside className="checkout-sidebar">

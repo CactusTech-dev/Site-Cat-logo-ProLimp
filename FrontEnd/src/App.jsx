@@ -6,6 +6,7 @@ import Catalogo from './pages/Catalogo.jsx';
 import Sobre from './pages/Sobre.jsx';
 import Login from './pages/Login.jsx';
 import Carrinho from './pages/Carrinho.jsx';
+import Manutencao from './pages/Manutencao.jsx';
 import { CarrinhoProvider } from './services/CarrinhoContext'; 
 import { useCarrinho } from './services/CarrinhoContext';
 import CartIcon from './components/CartIcon.jsx';
@@ -14,6 +15,7 @@ function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [tema, setTema] = useState(localStorage.getItem('tema') || 'light');
   const [autenticado, setAutenticado] = useState(false);
+  const emManutencao = false;
 
   const toggleTema = () => {
     const novoTema = tema === 'light' ? 'dark' : 'light';
@@ -25,6 +27,18 @@ function App() {
     const token = localStorage.getItem("token");
     if (token) setAutenticado(true);
   }, []);
+
+  if (emManutencao) {
+    return (
+      <Router>
+        <Routes>
+          <Route path="/login" element={<Login setAutenticado={setAutenticado} />} />
+          <Route path="/admin" element={autenticado ? <Admin setAutenticado={setAutenticado} /> : <Navigate to="/login" />} />
+          <Route path="*" element={<Manutencao />} />
+        </Routes>
+      </Router>
+    );
+  }
 
   return (
     <div className={`app-wrapper ${tema}`}>

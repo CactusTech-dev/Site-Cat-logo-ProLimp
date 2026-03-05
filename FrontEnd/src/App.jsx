@@ -15,7 +15,7 @@ function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [tema, setTema] = useState(localStorage.getItem('tema') || 'light');
   const [autenticado, setAutenticado] = useState(false);
-  const emManutencao = false;
+  const emManutencao = true;
 
   const toggleTema = () => {
     const novoTema = tema === 'light' ? 'dark' : 'light';

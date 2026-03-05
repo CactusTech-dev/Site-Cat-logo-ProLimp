@@ -36,10 +36,12 @@
 .sidebar-header {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 15px; /* Espaço entre logo e texto */
   margin-bottom: 40px;
   color: #ffffff;
   flex-shrink: 0;
+  width: 100%;
+  overflow: visible; /* Garante que o texto apareça */
 }
 
 .sidebar-content {
@@ -106,22 +108,31 @@
 }
 
 .sidebar-logo {
-  width: 51px;      
-  height: 51px;
+  width: 40px;      
+  height: 40px;
   border-radius: 50%; 
   object-fit: cover; 
   border: 2px solid #ffffff; 
   transition: all 0.3s ease;
+  flex-shrink: 0; /* Não deixa a logo esmagar */
 }
 
 .sidebar-logo.expanded {
-  width: 100px;
-  height: 100px;
+  width: 55px; /* Com 100px não sobra espaço para o texto na mesma linha */
+  height: 55px;
 }
 
 .full-logo {
-  font-weight: bold;
-  font-size: 2.2rem;
-  color: #007bff;
+  font-weight: 900;
+  font-size: 1.5rem; /* 2.2rem era muito grande para ficar ao lado da logo */
+  color: #ffffff;    /* Mudei de azul para BRANCO para aparecer no fundo azul */
   white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.social-link:hover .info-item {
+  background: rgba(255, 255, 255, 0.1); /* Um destaque leve em vez de mudar a cor do texto para escuro */
+  border-radius: 8px;
+  color: #ffffff; 
 }

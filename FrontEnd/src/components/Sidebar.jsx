@@ -15,12 +15,14 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
 
       <aside className={`sidebar ${isOpen ? 'open' : ''}`}>
         <div className="sidebar-header">
+          <div className="brand-bundle"> 
           <img 
             src={logo} 
             alt="Logo ProLimp" 
             className={`sidebar-logo ${isOpen ? 'expanded' : 'collapsed'}`} 
           />
           {isOpen && <span className="full-logo">ProLimp</span>}
+          </div>
         </div>
 
         <div className="sidebar-content">
